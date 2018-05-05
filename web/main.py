@@ -4,7 +4,7 @@ from adapter.greeting import adapterGreeting
 from adapter.ner import adapterNer
 from app import chatbot
 from app import apixuChatBot as api
-import adapter.crf_ner_no_accent.ner_crf_no_accent as ner_crf_no_accent
+# import adapter.crf_ner_no_accent.ner_crf_no_accent as ner_crf_no_accent
 import datetime
 import pprint
 app = Flask(__name__, static_url_path="/static")

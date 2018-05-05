@@ -1,6 +1,6 @@
 import re
 import pycrfsuite
-from pyvi.pyvi import ViTokenizer, ViPosTagger
+from pyvi import ViTokenizer, ViPosTagger
 
 def no_accent_vietnamese(s):
     s = re.sub(u'[àáạảãâầấậẩẫăằắặẳẵ]', 'a', s)

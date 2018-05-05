@@ -5,6 +5,7 @@ import setting
 import re
 import random
 
+
 def read_file(filePath):
     with open(filePath,"r") as file:
         data = file.readlines()

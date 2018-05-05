@@ -59,43 +59,43 @@
   function emoji(message){
     let mes = message;
     if(message.includes(":)")){
-      mes = message.replace(":)","<i class='em em-slightly_smiling_face'></i>")
+      mes = mes.replace(/:\)/g,"<i class='em em-slightly_smiling_face'></i>")
     }
     if(message.includes(":(")){
-      mes = message.replace(":(","<i class='em em-disappointed'></i>")
+      mes = mes.replace(/:\(/g,"<i class='em em-disappointed'></i>")
     }
     if(message.includes(":D")){
-      mes = message.replace(":D","<i class='em em-smiley'></i>")
+      mes = mes.replace(/:D/g,"<i class='em em-smiley'></i>")
     }
     if(message.includes("<3")){
-      mes = message.replace("<3","<i class='em em-hearts'></i>")
+      mes = mes.replace(/<3/g,"<i class='em em-hearts'></i>")
     }
     if(message.includes(":/")){
-      mes = message.replace(":/","<i class='em em-face_with_rolling_eyes'></i>")
+      mes = mes.replace(/:\//g,"<i class='em em-face_with_rolling_eyes'></i>")
     }
     if(message.includes(":o")){
-      mes = message.replace(":o","<i class='em em-hushed'></i>")
+      mes = mes.replace(/:o/g,"<i class='em em-hushed'></i>")
     }
     if(message.includes(":*")){
-      mes = message.replace(":*","<i class='em em-kissing_smiling_eyes'></i>")
+      mes = mes.replace(/:\*/g,"<i class='em em-kissing_smiling_eyes'></i>")
     }
     if(message.includes(":|")){
-      mes = message.replace(":|","<i class='em em-neutral_face'></i>")
+      mes = mes.replace(/:\|/g,"<i class='em em-neutral_face'></i>")
     }
     if(message.includes(">.<")){
-      mes = message.replace(">.<","<i class='em em-persevere'></i>")
+      mes = mes.replace(/>\.</g,"<i class='em em-persevere'></i>")
     }
     if(message.includes(":j")){
-      mes = message.replace(":j","<i class='em em-smirk'></i>")
+      mes = mes.replace(/:j/g,"<i class='em em-smirk'></i>")
     }
     if(message.includes(":P")){
-      mes = message.replace(":P","<i class='em em-stuck_out_tongue'></i>")
+      mes = mes.replace(/:P/g,"<i class='em em-stuck_out_tongue'></i>")
     }    
     if(message.includes(":;")){
-      mes = message.replace(":;","<i class='em em-wink'></i>")
+      mes = mes.replace(/:;/g,"<i class='em em-wink'></i>")
     }
     if(message.includes("-_-")){
-      mes = message.replace("-_-","<i class='em em-expressionless'></i>")
+      mes = mes.replace(/-_-/g,"<i class='em em-expressionless'></i>")
     }
     return mes
   }
@@ -103,6 +103,7 @@
     const inputElement = $('#message');
     const message = inputElement.val();
     inputElement.val('');
+    console.log(emoji(":) <3"))
     insertMessageOut(emoji(message));
     scrollToNewestMessage();
 
