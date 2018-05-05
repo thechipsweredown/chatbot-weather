@@ -1,0 +1,38 @@
+bình minh | time-ex | dawn
+hoàng hôn | time-ex | sunset
+mặt trời mọc | time-ex | dawn
+mặt trời lặn | time-ex | sunset
+chiều tà | time | 16,17,18
+
+về sáng | time | 3,4,5,6
+nửa đêm | time | 23,0,1
+đêm xuống | time | 18,19,20,21,22,23,0
+đêm | time | 18,19,20,21,22,23,0,1,2,3,4,5
+buổi đêm | time | 18,19,20,21,22,23,0,1,2,3,4,5
+ban đêm | time | 18,19,20,21,22,23,0,1,2,3,4,5
+tối | time | 18,19,20,21,22,23
+buổi tối | time | 18,19,20,21,22,23
+
+buổi ngày | time | 6,7,8,9,10,11,12,13,14,15,16,17
+ban ngày | time | 6,7,8,9,10,11,12,13,14,15,16,17
+sáng | time | 6,7,8,9,10,11
+chiều | time | 13,14,15,16,17
+trưa | time | 12
+giữa trưa | time | 12
+buổi sáng | time | 6,7,8,9,10,11
+buổi chiều | time | 13,14,15,16,17
+buổi trưa | time | 12
+
+bây giờ | time | now
+hiện tại | time | now
+lúc này | time | now
+ngay lúc này | time | now
+
+#5 giờ | time | (0?[0-9]|1[0-9]|2[0-3])(\s?)giờ
+#6 h
+#2h
+#2h50
+#5 h 45 phút
+#5:30
+#5:30:60 | time |
+#5 giờ 30 phút

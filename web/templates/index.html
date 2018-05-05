@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chat</title>
+  <!-- <link href="../static/css/bootstrap.min.css" rel="stylesheet"> -->
+  <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+  <!-- <link href="/static/css/font-awesome.min.css" rel="stylesheet"> -->
+  <!-- <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+  <script src="/static/js/jquery.min.js"></script>
+  <link href="/static/css/app.css" rel="stylesheet">
+  <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="panel-body">
+        <ul class="chat" id="message-list">
+          <li class="left clearfix">
+            <span class="chat-img pull-left">
+              <img src="/static/img/bot.png" alt="User Avatar" class="img-circle" />
+            </span>
+            <div class="chat-body clearfix">
+              <!-- <div class="header">
+                <strong class="primary-font">Bot</strong>
+                <small class="pull-right text-muted">
+                  <i class="fa fa-clock-o" aria-hidden="true"></i>12 mins ago
+                </small>
+              </div> -->
+              <p class="chat-content-in">
+                Xin chào. Tôi có thể giúp gì cho bạn?
+                <i class="em em-slightly_smiling_face"></i>
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="panel-footer">
+        <div class="input-group">
+          <input id="message" type="text" class="form-control input-lg" placeholder="Type your message here..." />
+          <span class="input-group-btn">
+            <button class="btn btn-warning btn-lg" id="submit-message">
+            Send</button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('#submit-message').on('click', handleSubmit);
+  $('#message').keypress(function(event) {
+    if (event.which == 13) {
+      handleSubmit();
+    }
+  });
+  function emoji(message){
+    let mes = message;
+    if(message.includes(":)")){
+      mes = message.replace(":)","<i class='em em-slightly_smiling_face'></i>")
+    }
+    if(message.includes(":(")){
+      mes = message.replace(":(","<i class='em em-disappointed'></i>")
+    }
+    if(message.includes(":D")){
+      mes = message.replace(":D","<i class='em em-smiley'></i>")
+    }
+    if(message.includes("<3")){
+      mes = message.replace("<3","<i class='em em-hearts'></i>")
+    }
+    if(message.includes(":/")){
+      mes = message.replace(":/","<i class='em em-face_with_rolling_eyes'></i>")
+    }
+    if(message.includes(":o")){
+      mes = message.replace(":o","<i class='em em-hushed'></i>")
+    }
+    if(message.includes(":*")){
+      mes = message.replace(":*","<i class='em em-kissing_smiling_eyes'></i>")
+    }
+    if(message.includes(":|")){
+      mes = message.replace(":|","<i class='em em-neutral_face'></i>")
+    }
+    if(message.includes(">.<")){
+      mes = message.replace(">.<","<i class='em em-persevere'></i>")
+    }
+    if(message.includes(":j")){
+      mes = message.replace(":j","<i class='em em-smirk'></i>")
+    }
+    if(message.includes(":P")){
+      mes = message.replace(":P","<i class='em em-stuck_out_tongue'></i>")
+    }    
+    if(message.includes(":;")){
+      mes = message.replace(":;","<i class='em em-wink'></i>")
+    }
+    if(message.includes("-_-")){
+      mes = message.replace("-_-","<i class='em em-expressionless'></i>")
+    }
+    return mes
+  }
+  function handleSubmit() {
+    const inputElement = $('#message');
+    const message = inputElement.val();
+    inputElement.val('');
+    insertMessageOut(emoji(message));
+    scrollToNewestMessage();
+
+    $.ajax({
+      url: '/m',
+      method: 'post',
+      data: {
+        m: message
+      },
+    })
+    .done(function(res) {
+      res = JSON.parse(res);
+      console.log(res);
+      insertMessageIn(emoji(res.message));
+      scrollToNewestMessage();
+    })
+    .fail(function(err) {
+      console.log(err);
+    });
+  }
+
+  function insertMessageOut(message) {
+    $('#message-list').append(
+      `<li class="right clearfix">
+        <span class="chat-img pull-right">
+          <img src="/static/img/me.png" class="img-circle" />
+        </span>
+        <div class="chat-body clearfix">
+          <p class="chat-content-out">
+            ${message}
+          </p>
+        </div>
+      </li>`
+    );
+  }
+
+  function insertMessageIn(message) {
+    $('#message-list').append(
+      `<li class="left clearfix">
+        <span class="chat-img pull-left">
+          <img src="/static/img/bot.png" class="img-circle" />
+        </span>
+        <div class="chat-body clearfix">
+          <p class="chat-content-in">
+            ${message}
+          </p>
+        </div>
+      </li>`
+    );
+  }
+
+  function scrollToNewestMessage() {
+    $(".panel-body").stop().animate({ scrollTop: $(".panel-body")[0].scrollHeight}, 900);
+  }
+</script>
+
+</body>
+</html>

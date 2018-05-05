@@ -1,0 +1,69 @@
+1. chạy file
+    b1 : cd vào project
+    b2 : " python3 main.py "
+
+2. chạy hàm response() trong chatbot để lấy tin nhắn của bot trả về
+
+3. chạy hàm get_intend() trong adapterIntend để lấy intend
+    1 : chào hỏi
+    2 : hỏi wh
+    3 : hỏi yesno
+    4 : orther
+
+4. chạy hàm detect_entity() trong adapterNer để lấy entity
+    trong hàm detect_entity() :
+        -chạy crf lấy ra dữ liệu thô sau đó truyền vào hàm pass_entity() để lấy ra dữ liệu chuẩn
+
+5. sơ đồ chạy
+    - con bot sẽ có 3 trạng thái 1,2,3 ,bình thường nó sẽ có state 1
+    - nhập câu hỏi vào :
+        - nếu state = 1 , xác định intend :
+            - nếu intend = 1 sẽ gọi đến adapterGreeting lấy msg về
+            - nếu intend = 2,3 sẽ gọi đến adapterNer lấy ra entity
+                - nếu không xác định được entity :
+                    - state = 2
+                    - hỏi lại entity nào còn thiếu
+                - nếu xác định được entity :
+                    - state = 3
+                    - trả về kết quả
+            - nếu intend = 4 sẽ trả lời ko biết
+        - nếu state = 2 , xác định intend :
+            - nếu intend = 1 sẽ gọi đến adapterGreeting lấy msg về , đặt lại state = 1
+            - nếu intend = 2,3,4 sẽ gọi đến adapterNer lấy ra entity
+                - nếu không xác định được entity :
+                    - giữ nguyên state = 2
+                    - hỏi lại entity nào còn thiếu
+                - nếu xác định được entity :
+                    - state = 3
+                    - trả về kết quả
+        - nếu state = 3 ,xác định mẫu câu hỏi :
+            - nếu là dạng "vậy thì .." ,"vậy còn .." ,"còn .. " ,.. (phần này sẽ không chắc chắn vì mẫu câu dễ sai lệch nội dung)
+                -  gọi đến adapterNer lấy ra entity
+                    - nếu không có bất kỳ entity nào , state = 1 ,đưa ra msg ko biết
+                    - có entity , trả về câu trả lời
+
+
+        - sau khi lấy được hết các dữ liệu sẽ truy cập vào api thời tiết để lấy ra dữ liệu
+            - có 3 cái api là openweathermap , api.apixu.com và AccWeather :
+                - cái openweathermap cần nhiều tiền mới hỗ trợ
+                - cái AccWeather ko hỗ trợ dữ liệu lịch sử quá 24h , nhưng forecast hình như chi tiết hơn
+                - cái api.apixu.com mỗi cái đều trung bình
+
+6. train
+    - intend :
+        - thêm dữ liệu vào 4 file trong data :
+            - greeting
+            - orther
+            - wh_weather
+            - yesno_weather
+    - ner :
+        - thêm dữ liệu đánh tag vào file train_ner
+    - greeting :
+        - thêm dữ liệu vào file greeting_train_file
+
+    train cái nào thì vào file main.py , gọi hàm train() của train.py phần đó ra
+
+    ex :
+        from adapter.ner import train
+        train.train()
+

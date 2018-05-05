@@ -1,0 +1,39 @@
+ngày mai | day | 1
+mai | day | 1
+hôm sau | day | 1
+mai sau | day | 1
+hôm nay | day | 0
+ngày kia | day | 2
+ngày kia nữa | day | 3
+ngày mốt | day | 2
+tuần này | week | 0
+tuần sau | week | 1
+tuần trước | week | -1
+tháng này | month | 0
+tháng trước | month | -1
+tháng sau | month | 1
+hôm qua | day | -1
+hôm trước | day | -2
+thứ 2 | dow |
+thứ 3 | dow |
+thứ 4 | dow |
+thứ 5 | dow |
+thứ 6 | dow |
+thứ 7 | dow |
+chủ nhật | dow |
+ngày 20 | ex | ngày ([0-9]{1,2})
+ngày 20/10 | ex | ngày ([0-9]{1,2}/[0-9]{1,2})
+ngày 26/2/2017 | ex | ngày ([0-9]{1,2}/[0-9]{1,2}/[0-9]{4})
+ngày 20-1 | ex | ngày ([0-9]{1,2}-[0-9]{1,2})
+ngày 19-10-2017 | ex | ngày ([0-9]{1,2}-[0-9]{1,2}-[0-9]{4})
+ngày 20 tháng này | ex | ngày ([0-9]{1,2}) tháng (này|sau|kia|trước)
+ngày 20 tháng 3
+ngày 20 tháng 3 năm 2018
+tháng 7
+năm 2020
+chủ nhật
+đầu tuần
+cuối tuần
+vài ngày nữa
+3 ngày nữa
+3 ngày tới
