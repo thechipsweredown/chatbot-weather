@@ -31,6 +31,14 @@ def response_message():
     #     results = response(m)
     # else:
     #     results = response_no_accent(m)
+    if m == ":)" or m ==":(" or m==":D" or m == ":;" or m == "<3" or m == ":*":
+                return json.dumps({
+                'message': ":D"
+                 })
+    if m == ":P" or m ==":j" or m=="-_-" or m == ":/" or m ==":o":
+                return json.dumps({
+                'message': ":j"
+                 })                          
     intend = results['intend']
     if intend == 1:
         return json.dumps({

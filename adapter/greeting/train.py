@@ -50,7 +50,6 @@ def format(line):
 def main():
     filePath = setting.GREETING_TRAIN_FILE
     data = load_data(read_file(filePath))
-    print(data)
     keys = []
     keys.extend(data.keys())
     vectorizer = train(data.keys())
