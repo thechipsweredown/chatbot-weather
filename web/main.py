@@ -147,10 +147,12 @@ def response(user_msg):
             data = adapterNer.detect_entity(user_msg)
         return make_msg(data,intend)
     elif session['bot_state'] == 3 :
+        data = adapterNer.detect_entity(user_msg)
         if adapterNer.detect_question_again(user_msg):
             data = adapterNer.detect_entity(user_msg)
-            print(data)
             return make_msg(data,intend)
+        # elif data['LOC'] != [] or data['TIME'] != [] or data['WEATHER'] != []:
+        #     return make_msg(data, intend)
         else :
             session['bot_state'] = 1
             session['time'] = None
@@ -173,7 +175,7 @@ def response_no_accent(user_msg):
 
 def make_msg(data=None,intend=4):
     data_msg = {}
-    if session['bot_state'] == 3 :
+    if session['bot_state'] == 3:
         if data['LOC'] == [] and data['TIME'] == [] and data['WEATHER'] == [] :
             session['loc'] = []
             session['time'] = []
@@ -185,7 +187,6 @@ def make_msg(data=None,intend=4):
                 session['loc'] = data['LOC']
             if data['TIME'] != [] :
                 session['time'] = data['TIME']
-                # session['bot_msg'] = query_api({"loc": session['loc'], "time": session['time'], "weather": session['weather']})
             if len(data["WEATHER"]) == 0:
                 session['weather'] = session['weather']
             else:
@@ -201,10 +202,16 @@ def make_msg(data=None,intend=4):
             session['weather'] = ["thời tiết"]
             session['bot_state'] = 1
         elif intend == 2:
-            session['loc'] = data["LOC"]
-            session['time'] = data["TIME"]
-            if len(data["WEATHER"]) == 0:
+            # session['loc'] = data["LOC"]
+            # session['time'] = data["TIME"]
+            if data['LOC'] != [] :
+                session['loc'] = data['LOC']
+            if data['TIME'] != [] :
+                session['time'] = data['TIME']
+            if len(data["WEATHER"]) == 0 and session['weather'] == []:
                 session['weather'] = ["thời tiết"]
+            elif len(data['WEATHER']) == 0:
+                session['weather'] = session['weather']
             else:
                 session['weather'] = data["WEATHER"]
 
@@ -218,10 +225,16 @@ def make_msg(data=None,intend=4):
                 session['bot_msg'] = query_api({"loc": session['loc'], "time": session['time'], "weather": session['weather']})
                 session['bot_state'] = 3
         elif intend == 3:
-            session['loc'] = data["LOC"]
-            session['time'] = data["TIME"]
-            if len(data["WEATHER"]) == 0:
+            # session['loc'] = data["LOC"]
+            # session['time'] = data["TIME"]
+            if data['LOC'] != [] :
+                session['loc'] = data['LOC']
+            if data['TIME'] != [] :
+                session['time'] = data['TIME']
+            if len(data["WEATHER"]) == 0 and session['weather'] == []:
                 session['weather'] = ["thời tiết"]
+            elif len(data['WEATHER']) == 0:
+                session['weather'] = session['weather']
             else:
                 session['weather'] = data["WEATHER"]
 

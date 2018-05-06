@@ -79,8 +79,11 @@ class AdapterNer(object):
     @staticmethod
     def detect_question_again(user_msg):
         user_msg = re.sub("\?","",user_msg).strip()
-        matchObj = re.match(r'(vậy|vậy còn|thế còn|còn|thế) (.*) .*', user_msg, re.M | re.I)
+        matchObj = re.match(r'(vậy|vậy còn|thế còn|còn|thế|thì sao) (.*) .*', user_msg, re.M | re.I)
+        match = re.match(r'(.*) .* (vậy|vậy còn|thế còn|còn|thế|thì sao)', user_msg, re.M | re.I)
         if matchObj :
+            return True
+        if match:
             return True
         return False
 
