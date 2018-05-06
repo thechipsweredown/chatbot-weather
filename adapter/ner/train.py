@@ -27,7 +27,9 @@ def pass_entity(list_entity):
         if tup[1] == "TIME":
             result['TIME'].append(tup[0])
     return result
-
+def test():
+    script_test = "java -cp stanford-ner/stanford-ner.jar edu.stanford.nlp.ie.crf.CRFClassifier -loadClassifier model/chatbot-ner.ser.gz -testFile data/test_ner"
+    subprocess.call(script_test, shell=True)
 
 def main():
     classifier = 'model/chatbot-ner.ser.gz'
